@@ -1,6 +1,37 @@
-05-10 22:23:28.606 [main] ERROR top.monoliths.App
+05-11 09:24:23.585 [main] ERROR top.monoliths.App
 message
 
-05-10 22:23:28.611 [main] ERROR top.monoliths.App
+05-11 09:24:23.586 [main] ERROR top.monoliths.App
 test error
 
+05-11 09:25:07.840 [main] ERROR top.monoliths.App
+message
+
+05-11 09:25:07.841 [main] ERROR top.monoliths.App
+test error
+
+05-11 09:26:13.356 [main] ERROR top.monoliths.App
+message
+
+05-11 09:26:13.358 [main] ERROR top.monoliths.App
+test error
+
+05-11 09:28:00.429 [main] ERROR top.monoliths.App
+message
+
+05-11 09:28:00.430 [main] ERROR top.monoliths.App
+test error
+
+05-11 10:09:20.412 [main] ERROR top.monoliths.App
+err
+
+com.deepoove.poi.exception.ResolverException: Cannot find the file [C:\Users\Administrator\Documents\Tencent Files\2953917577\FileRecv冰川三明治.台词版-release.docx]
+	at top.monoliths.App.main(App.java:37) [classes/:?]
+Caused by: java.io.FileNotFoundException: C:\Users\Administrator\Documents\Tencent Files\2953917577\FileRecv冰川三明治.台词版-release.docx (系统找不到指定的文件。)
+	at java.io.FileInputStream.open0(Native Method) ~[?:?]
+	at java.io.FileInputStream.open(FileInputStream.java:211) ~[?:?]
+	at java.io.FileInputStream.<init>(FileInputStream.java:153) ~[?:?]
+	at com.deepoove.poi.XWPFTemplate.compile(XWPFTemplate.java:97) ~[poi-tl-1.9.1.jar:?]
+	at com.deepoove.poi.XWPFTemplate.compile(XWPFTemplate.java:84) ~[poi-tl-1.9.1.jar:?]
+	at com.deepoove.poi.XWPFTemplate.compile(XWPFTemplate.java:80) ~[poi-tl-1.9.1.jar:?]
+	at top.monoliths.App.main(App.java:23) ~[classes/:?]
