@@ -7,6 +7,10 @@ import java.util.regex.Pattern;
 
 import com.deepoove.poi.XWPFTemplate;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -19,17 +23,22 @@ public class App {
     public static Log log = LogFactory.getLog(App.class);
 
     public static void main(String[] args) {
-        Gson gson = new Gson();
+        JsonObject data = new JsonObject();
+        JsonArray bodyList = new JsonArray();
 
         try (XWPFTemplate template = XWPFTemplate
                 .compile("C:\\Users\\Administrator\\Downloads\\冰川三明治.台词版-release.docx");
-                FileWriter fWriter = new FileWriter("output.txt")) {
+                FileWriter textOutputFile = new FileWriter("textOutputFile.txt");
+                FileWriter jsonOutputFile = new FileWriter("jsonOutputFile.json");
+                FileWriter ignoreOutputFile = new FileWriter("ignoreOutputFile.txt");) {
             template.getXWPFDocument().getParagraphs().forEach((els) -> {
                 if (els != null) {
                     try {
                         // text line analyze business logic
                         String line = Pattern.compile("\\s*|\t|\r|\n|　").matcher(els.getText()).replaceAll("");
                         if (line != null && !line.equals("")) {
+                            // if not null
+                            Gson element = new Gson();
                             String[] dialogSplit = line.split("：");
                             if (dialogSplit.length <= 1) {
                                 // is not dialog
@@ -38,11 +47,16 @@ public class App {
                                     // have scene description
                                     String[] sceneLeft = sceneRight[1].split("）");
                                     String sceneBody = sceneLeft[0];
+                                    JsonElement el = element.toJsonTree(new SceneDescription(sceneBody));
+                                    bodyList.add(el);
+                                    // bodyList.add(el);
 
-                                    new SceneDescription(sceneBody); //
+                                    // log.info(el);
 
+                                    element = null;
                                 } else {
-                                    // ignore
+                                    log.info("ignore: " + line);
+                                    ignoreOutputFile.write(line + "\n");
                                 }
                             } else {
                                 String head = dialogSplit[0];
@@ -56,16 +70,26 @@ public class App {
                                     String[] asideLeft = asideRight[1].split("）");
                                     asideBody = new String[]{asideLeft[0]};
                                 }
-                                new RoleDialogue(head, body, asideBody, effectBody); //
+                                
+                                JsonElement el = element.toJsonTree(new RoleDialogue(head, body, asideBody, effectBody));
+                                bodyList.add(el);
+
+                                // log.info(el);
+
+                                element = null;
                             }
-                            fWriter.write(line);
-                            fWriter.write("\n");
+                            // output to text
+                            textOutputFile.write(line + "\n");
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
             });
+            // use Gson to format output
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            data.add("frameList", bodyList);
+            jsonOutputFile.write(gson.toJson(data));
         } catch (FileNotFoundException e) {
             log.error("err", e.fillInStackTrace());
             e.printStackTrace();
