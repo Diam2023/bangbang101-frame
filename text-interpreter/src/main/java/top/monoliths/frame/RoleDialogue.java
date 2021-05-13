@@ -32,6 +32,14 @@ public class RoleDialogue {
      */
     private String[] effect;
 
+    /**
+     * default auto stay time limit
+     */
+    private Integer delay;
+
+    public Integer getDelay() {
+        return delay;
+    }
 
     public String[] getAside() {
         return aside;
@@ -51,6 +59,10 @@ public class RoleDialogue {
 
     public String getVerticalDrawing() {
         return verticalDrawing;
+    }
+
+    public void setDelay(Integer delay) {
+        this.delay = delay;
     }
 
     public void setAside(String[] aside) {

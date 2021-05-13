@@ -13,11 +13,6 @@ public class FrameScene {
     private String background;
     
     /**
-     * delay time to show
-     */
-    private Long delayTime;
-
-    /**
      * in express
      */
     private TransitionType expressInType;
@@ -31,9 +26,6 @@ public class FrameScene {
         return background;
     }
 
-    public Long getDelayTime() {
-        return delayTime;
-    }
 
     public TransitionType getExpressInType() {
         return expressInType;
@@ -47,9 +39,6 @@ public class FrameScene {
         this.background = background;
     }
 
-    public void setDelayTime(Long delayTime) {
-        this.delayTime = delayTime;
-    }
 
     public void setExpressInType(TransitionType expressInType) {
         this.expressInType = expressInType;
@@ -62,11 +51,9 @@ public class FrameScene {
     /**
      * set background and delay
      * @param background image path
-     * @param delay time pan sec
      */
-    public FrameScene(String background, Long delay) {
+    public FrameScene(String background) {
         setBackground(background);
-        setDelayTime(delayTime);
         setExpressInType(TransitionType.FEED);
         setExpressOutType(TransitionType.FEED);
     }
@@ -76,9 +63,8 @@ public class FrameScene {
      * @param background image path
      * @param delay time pan sec
      */
-    public FrameScene(String background, Long delay, TransitionType in, TransitionType out) {
+    public FrameScene(String background, TransitionType in, TransitionType out) {
         setBackground(background);
-        setDelayTime(delayTime);
         setExpressInType(in);
         setExpressOutType(out);
     }

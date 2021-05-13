@@ -54,6 +54,7 @@ public class App {
                                     // log.info(el);
 
                                     element = null;
+
                                 } else {
                                     log.info("ignore: " + line);
                                     ignoreOutputFile.write(line + "\n");
