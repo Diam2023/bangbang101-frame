@@ -31,6 +31,7 @@ public class App {
                 FileWriter textOutputFile = new FileWriter("textOutputFile.txt");
                 FileWriter jsonOutputFile = new FileWriter("jsonOutputFile.json");
                 FileWriter ignoreOutputFile = new FileWriter("ignoreOutputFile.txt");) {
+                    template.getXWPFDocument().getParagraphs();
             template.getXWPFDocument().getParagraphs().forEach((els) -> {
                 if (els != null) {
                     try {
