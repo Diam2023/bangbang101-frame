@@ -15,6 +15,8 @@ import com.google.gson.JsonObject;
 
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 
+import top.monoliths.frame.FrameScene;
+
 /**
  * @since 1.0
  * @author monoliths
@@ -62,7 +64,8 @@ public class TextInterpreter {
      * @throws EOFException          file read error
      * @throws NullPointerException  wordPath is null or file is null
      */
-    public TextInterpreter(String wordPath) throws FileNotFoundException, IOException, EOFException, NullPointerException {
+    public TextInterpreter(String wordPath)
+            throws FileNotFoundException, IOException, EOFException, NullPointerException {
         // construct a template of word
         XWPFTemplate template = XWPFTemplate.compile(wordPath);
         // get paragraphs to wordData
@@ -88,9 +91,13 @@ public class TextInterpreter {
      * @throws NullPointerException
      */
     public JsonArray toJsonArray() throws NullPointerException {
+        JsonArray result = new JsonArray();
         textLines.forEach((textLine) -> {
+            Gson gson = new Gson();
             switch (getTextType(textLine)) {
                 case FRAMESCENE:
+                    String[] dt = textLine.split("【")[1].split("：");
+                    result.add(gson.toJson(new FrameScene(dt[1])));
                     break;
                 case ROLADIALOGUE:
                     break;
@@ -102,6 +109,7 @@ public class TextInterpreter {
                     // unknown type
                     break;
             }
+            gson = null;
         });
         return null;
     }
