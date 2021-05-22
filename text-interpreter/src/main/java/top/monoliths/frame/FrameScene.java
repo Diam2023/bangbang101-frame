@@ -7,11 +7,17 @@ package top.monoliths.frame;
  * @author monoliths
  */
 public class FrameScene {
+
+    @SuppressWarnings("unused")
+    private final String type = getClass().getSimpleName().replaceFirst(
+            String.valueOf(getClass().getSimpleName().charAt(0)),
+            String.valueOf(getClass().getSimpleName().charAt(0)).toLowerCase());
+
     /**
      * background image
      */
     private String background;
-    
+
     /**
      * in express
      */
@@ -26,7 +32,6 @@ public class FrameScene {
         return background;
     }
 
-
     public TransitionType getExpressInType() {
         return expressInType;
     }
@@ -34,11 +39,10 @@ public class FrameScene {
     public TransitionType getExpressOutType() {
         return expressOutType;
     }
-    
+
     public void setBackground(String background) {
         this.background = background;
     }
-
 
     public void setExpressInType(TransitionType expressInType) {
         this.expressInType = expressInType;
@@ -47,9 +51,10 @@ public class FrameScene {
     public void setExpressOutType(TransitionType expressOutType) {
         this.expressOutType = expressOutType;
     }
-    
+
     /**
      * set background and delay
+     * 
      * @param background image path
      */
     public FrameScene(String background) {
@@ -60,8 +65,9 @@ public class FrameScene {
 
     /**
      * set background and delay
+     * 
      * @param background image path
-     * @param delay time pan sec
+     * @param delay      time pan sec
      */
     public FrameScene(String background, TransitionType in, TransitionType out) {
         setBackground(background);
@@ -72,8 +78,5 @@ public class FrameScene {
 }
 
 enum TransitionType {
-    FEED,
-    ROTATE,
-    SCALE,
-    TRANSLATION
+    FEED, ROTATE, SCALE, TRANSLATION
 }

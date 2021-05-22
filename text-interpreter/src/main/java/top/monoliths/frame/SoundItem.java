@@ -2,6 +2,11 @@ package top.monoliths.frame;
 
 public class SoundItem {
 
+    @SuppressWarnings("unused")
+    private final String type = getClass().getSimpleName().replaceFirst(
+            String.valueOf(getClass().getSimpleName().charAt(0)),
+            String.valueOf(getClass().getSimpleName().charAt(0)).toLowerCase());
+
     public static enum FREQUENCY {
         ONLYONCE, AROUND
     }
