@@ -35,3 +35,48 @@ Caused by: java.io.FileNotFoundException: C:\Users\Administrator\Documents\Tence
 	at com.deepoove.poi.XWPFTemplate.compile(XWPFTemplate.java:84) ~[poi-tl-1.9.1.jar:?]
 	at com.deepoove.poi.XWPFTemplate.compile(XWPFTemplate.java:80) ~[poi-tl-1.9.1.jar:?]
 	at top.monoliths.App.main(App.java:23) ~[classes/:?]
+05-21 21:50:05.102 [main] ERROR top.monoliths.App
+err: 
+
+com.deepoove.poi.exception.ResolverException: Cannot find the file [C:\Users\Administrator\Downloads\冰川三明治.台词版-release.docx]
+	at com.deepoove.poi.XWPFTemplate.compile(XWPFTemplate.java:99) ~[poi-tl-1.9.1.jar:?]
+	at com.deepoove.poi.XWPFTemplate.compile(XWPFTemplate.java:84) ~[poi-tl-1.9.1.jar:?]
+	at com.deepoove.poi.XWPFTemplate.compile(XWPFTemplate.java:80) ~[poi-tl-1.9.1.jar:?]
+	at top.monoliths.kernel.TextInterpreter.<init>(TextInterpreter.java:76) ~[classes/:?]
+	at top.monoliths.App.main(App.java:29) [classes/:?]
+Caused by: java.io.FileNotFoundException: C:\Users\Administrator\Downloads\冰川三明治.台词版-release.docx (系统找不到指定的路径。)
+	at java.io.FileInputStream.open0(Native Method) ~[?:?]
+	at java.io.FileInputStream.open(FileInputStream.java:211) ~[?:?]
+	at java.io.FileInputStream.<init>(FileInputStream.java:153) ~[?:?]
+	at com.deepoove.poi.XWPFTemplate.compile(XWPFTemplate.java:97) ~[poi-tl-1.9.1.jar:?]
+	... 4 more
+05-21 22:00:02.886 [main] ERROR top.monoliths.App
+err: 
+
+java.lang.UnsupportedOperationException: null
+	at java.util.ImmutableCollections.uoe(ImmutableCollections.java:127) ~[?:?]
+	at java.util.ImmutableCollections$AbstractImmutableCollection.add(ImmutableCollections.java:131) ~[?:?]
+	at top.monoliths.kernel.TextInterpreter.lambda$0(TextInterpreter.java:88) ~[classes/:?]
+	at java.util.ArrayList.forEach(ArrayList.java:1511) ~[?:?]
+	at java.util.Collections$UnmodifiableCollection.forEach(Collections.java:1087) ~[?:?]
+	at top.monoliths.kernel.TextInterpreter.<init>(TextInterpreter.java:82) ~[classes/:?]
+	at top.monoliths.App.main(App.java:29) [classes/:?]
+05-22 21:14:55.783 [main] ERROR top.monoliths.App
+err: 
+
+java.lang.UnsupportedOperationException: null
+	at java.util.ImmutableCollections.uoe(ImmutableCollections.java:127) ~[?:?]
+	at java.util.ImmutableCollections$AbstractImmutableCollection.add(ImmutableCollections.java:131) ~[?:?]
+	at top.monoliths.kernel.TextInterpreter.lambda$0(TextInterpreter.java:88) ~[classes/:?]
+	at java.util.ArrayList.forEach(ArrayList.java:1511) ~[?:?]
+	at java.util.Collections$UnmodifiableCollection.forEach(Collections.java:1087) ~[?:?]
+	at top.monoliths.kernel.TextInterpreter.<init>(TextInterpreter.java:82) ~[classes/:?]
+	at top.monoliths.App.main(App.java:29) [classes/:?]
+05-22 21:17:58.620 [main] ERROR top.monoliths.App
+err: 
+
+java.lang.UnsupportedOperationException: null
+	at java.util.ImmutableCollections.uoe(ImmutableCollections.java:127) ~[?:?]
+	at java.util.ImmutableCollections$AbstractImmutableCollection.add(ImmutableCollections.java:131) ~[?:?]
+	at top.monoliths.kernel.TextInterpreter.<init>(TextInterpreter.java:93) ~[classes/:?]
+	at top.monoliths.App.main(App.java:29) [classes/:?]

@@ -28,11 +28,6 @@ public class RoleDialogue {
     private String[] aside;
 
     /**
-     * list effect of character's action
-     */
-    private String[] effect;
-
-    /**
      * default auto stay time limit
      */
     private Integer delay;
@@ -43,10 +38,6 @@ public class RoleDialogue {
 
     public String[] getAside() {
         return aside;
-    }
-
-    public String[] getEffect() {
-        return effect;
     }
 
     public String getName() {
@@ -67,10 +58,6 @@ public class RoleDialogue {
 
     public void setAside(String[] aside) {
         this.aside = aside;
-    }
-
-    public void setEffect(String[] effect) {
-        this.effect = effect;
     }
 
     public void setName(String name) {
@@ -95,7 +82,6 @@ public class RoleDialogue {
         setName(name);
         setSection(section);
         setAside(null);
-        setEffect(null);
         setVerticalDrawing(null);
     }
 
@@ -110,42 +96,23 @@ public class RoleDialogue {
         setName(name);
         setSection(section);
         setAside(aside);
-        setEffect(null);
         setVerticalDrawing(null);
     }
 
     /**
      * #3
-     * 
-     * @param name character name
-     * @param section character words
-     * @param aside list of character's expression and action
-     * @param effect list effect of character's action
-     */
-    public RoleDialogue(String name, String section, String[] aside, String[] effect) {
-        setName(name);
-        setSection(section);
-        setAside(aside);
-        setEffect(effect);
-        setVerticalDrawing(null);
-    }
-
-    /**
-     * #4
      * complate add
      * 
      * @param name character name
      * @param verticalDrawing character header
      * @param section character words
      * @param aside list of character's expression and action
-     * @param effect list effect of character's action
      */
-    public RoleDialogue(String name, String verticalDrawing, String section, String[] aside, String[] effect) {
+    public RoleDialogue(String name, String verticalDrawing, String section, String[] aside) {
         setName(name);
         setVerticalDrawing(verticalDrawing);
         setSection(section);
         setAside(aside);
-        setEffect(effect);
     }
 
 }

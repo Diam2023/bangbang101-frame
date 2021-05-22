@@ -10,6 +10,13 @@
             "request": "launch",
             "mainClass": "top.monoliths.App",
             "projectName": "text-interpreter"
+        },
+        {
+            "type": "java",
+            "name": "Launch App",
+            "request": "launch",
+            "mainClass": "top.monoliths.App",
+            "projectName": "web-server"
         }
     ]
 }

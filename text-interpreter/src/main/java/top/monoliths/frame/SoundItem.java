@@ -2,22 +2,26 @@ package top.monoliths.frame;
 
 public class SoundItem {
 
+    public static enum FREQUENCY {
+        ONLYONCE, AROUND
+    }
+
     /**
      * music name
      */
-    private String name;
+    private String soundName;
 
     /**
      * voice play mode
      */
     private FREQUENCY around;
-    
+
     public void setAround(FREQUENCY around) {
         this.around = around;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.soundName = name;
     }
 
     public FREQUENCY getAround() {
@@ -25,7 +29,7 @@ public class SoundItem {
     }
 
     public String getName() {
-        return name;
+        return soundName;
     }
 
     /**
@@ -49,9 +53,4 @@ public class SoundItem {
         setName(name);
     }
 
-}
-
-enum FREQUENCY {
-    ONLYONCE,
-    AROUND
 }
