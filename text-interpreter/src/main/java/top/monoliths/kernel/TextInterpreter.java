@@ -137,10 +137,10 @@ public class TextInterpreter {
                     result.add(gson.toJsonTree(new SoundItem(soundName, FREQUENCY.AROUND)));
                     break;
                 case UNKNOWNTYPE:
-                    log.info("ignor: " + textLine);
+                    log.warn("ignor: " + textLine);
                     break;
                 default:
-                    log.info("ignor: " + textLine);
+                    log.warn("ignor: " + textLine);
                     // unknown type
                     break;
             }
@@ -217,8 +217,6 @@ public class TextInterpreter {
                         }
                 }
             } else {
-                // aside ignore line
-                log.info("ignor tag:" + text);
                 return TEXTTYPE.UNKNOWNTYPE;
             }
         } else {
