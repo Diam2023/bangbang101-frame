@@ -1,0 +1,3 @@
+config:C:\Users\asu\Desktop\pro\bangbang101-frame\web
+404:/404.html
+index:/index.html
