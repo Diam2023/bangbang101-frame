@@ -6,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.net.URLDecoder;
-import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +18,6 @@ import io.netty.handler.codec.http.DefaultFullHttpResponse;
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.FullHttpResponse;
 import io.netty.handler.codec.http.HttpHeaderNames;
-import io.netty.handler.codec.http.HttpRequestDecoder;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.netty.handler.codec.http.HttpVersion;
 import io.netty.util.CharsetUtil;
@@ -34,6 +32,7 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequ
     }
 
     @Override
+    @SuppressWarnings("all")
     protected void channelRead0(ChannelHandlerContext ctx, FullHttpRequest req)
             throws FileNotFoundException, Exception {
         // 100 Continue
@@ -99,6 +98,16 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequ
                     body = Unpooled.copiedBuffer(bf.readAllBytes());
                     bf.close();
                     break;
+                case ".json":
+                    head = "application/json; charset=UTF-8";
+                    bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(root + uri)));
+                    while ((line = bufferedReader.readLine()) != null) {
+                        msg.append(line + "\n");
+                    }
+                    System.out.println(uri);
+                    line = null;
+                    bufferedReader.close();
+                    body = Unpooled.copiedBuffer(msg.toString(), CharsetUtil.UTF_8);
                 default:
                     body = Unpooled.copiedBuffer(msg.toString(), CharsetUtil.UTF_8);
                     break;

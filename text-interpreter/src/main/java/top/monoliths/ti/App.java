@@ -13,8 +13,7 @@ public class App {
     public static void main(String[] args) {
         try {
             TextInterpreter tx = new TextInterpreter("C:\\Users\\asu\\Downloads\\冰川三明治-gal部分.docx");
-            tx.toJson("jsonOutputFile.json");
-
+            tx.toJson("web/data.json");
         } catch (FileNotFoundException e) {
             log.error("word document file not find", e);
         } catch (EOFException e) {

@@ -7,7 +7,7 @@
  * @param {number} interval interval of betwen two words show speed {ms}
  * @param {number} rate 倍率参数，对字数过长时的显示时间产生影响。
  * @returns {Promise} new Promise resolve to use await
- */ 
+ */
 let showRoleDialogue = (name, text, delay = 1500, interval = 40, rate = 1) => {
     return new Promise(
         resolve => {
@@ -113,12 +113,4 @@ function runAnimation(element, animate, duration, easing = "ease", iterations = 
         };
         element.animate(animate, animationOption);
     }, delay);
-}
-
-/**
- * 
- * @param {string} _name scene or 
- */
-function getSRC(_name) {
-
 }

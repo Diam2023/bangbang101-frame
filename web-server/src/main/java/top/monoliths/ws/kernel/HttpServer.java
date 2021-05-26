@@ -11,28 +11,33 @@ import io.netty.handler.logging.LoggingHandler;
 import java.net.InetSocketAddress;
 
 /**
- * netty server
- * 2018/11/1.
+ * netty server 2018/11/1.
  */
 public class HttpServer {
 
-    int port ;
+    private int port;
 
-    public HttpServer(int port){
+    public void setPort(int port) {
         this.port = port;
     }
 
-    public void start() throws Exception{
+    public int getPort() {
+        return port;
+    }
+
+    public HttpServer(int port) {
+        setPort(port);
+    }
+
+    public void start() throws Exception {
         ServerBootstrap bootstrap = new ServerBootstrap();
         EventLoopGroup boss = new NioEventLoopGroup();
         EventLoopGroup work = new NioEventLoopGroup();
-        bootstrap.group(boss,work)
-                .handler(new LoggingHandler(LogLevel.DEBUG))
-                .channel(NioServerSocketChannel.class)
+        bootstrap.group(boss, work).handler(new LoggingHandler(LogLevel.DEBUG)).channel(NioServerSocketChannel.class)
                 .childHandler(new HttpServerInitializer());
 
         ChannelFuture f = bootstrap.bind(new InetSocketAddress(port)).sync();
-        System.out.println(" server start up on port : " + port);
+        // System.out.println(" server start up on port : " + port);
         f.channel().closeFuture().sync();
 
     }

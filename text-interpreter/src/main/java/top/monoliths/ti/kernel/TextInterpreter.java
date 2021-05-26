@@ -177,6 +177,8 @@ public class TextInterpreter {
         String result = toJson();
         // write to file
         jsonOutputFile.write(result);
+        // flush to file
+        jsonOutputFile.flush();
         // close file stream
         jsonOutputFile.close();
         // return String of json

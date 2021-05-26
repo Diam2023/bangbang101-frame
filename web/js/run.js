@@ -1,4 +1,6 @@
-async function run(lineList, imgList) {
+async function run(dataUrl, imgList) {
+    lineList = (await (await fetch(dataUrl)).json()).frameList;
+
     // roleDialogueDelay 为一个角色对话完全显示完后等待的时间
     var roleDialogueDelay = 1300;
     // roleDialogueinterval 为角色对话中每个字停留到下一个字显示的等待时间
