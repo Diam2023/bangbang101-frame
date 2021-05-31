@@ -7,6 +7,7 @@
         {
             "type": "java",
             "name": "text-interpreter",
+            "vmArgs": "-Dsun.stdout.encoding=UTF-8 -Dsun.err.encoding=UTF-8",
             "request": "launch",
             "mainClass": "top.monoliths.ti.App",
             "projectName": "text-interpreter"
@@ -14,6 +15,7 @@
         {
             "type": "java",
             "name": "web-server",
+            "vmArgs": "-Dsun.stdout.encoding=UTF-8 -Dsun.err.encoding=UTF-8",
             "request": "launch",
             "mainClass": "top.monoliths.ws.App",
             "projectName": "web-server"
