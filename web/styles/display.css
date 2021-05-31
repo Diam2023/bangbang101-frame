@@ -39,6 +39,8 @@ main > img {
     max-width: 100vw;
     box-sizing: border-box;
     margin: auto;
+    margin-top: 0;
+    margin-bottom: 0;
     max-height: 100vh;
     height: auto;
 }

@@ -29,7 +29,7 @@ let showRoleDialogue = (name, text, delay = 1500, interval = 40, rate = 1) => {
             });
             setTimeout(() => {
                 resolve('done');
-            }, (textArray.length * interval + delay) * rate);
+            }, (textArray.length * interval * rate) + delay);
         }
     )
 }

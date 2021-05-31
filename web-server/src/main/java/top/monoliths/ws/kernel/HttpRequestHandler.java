@@ -53,6 +53,7 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequ
         BufferedReader bufferedReader;
         ByteBuf body;
         BufferedInputStream bf;
+        System.out.println(uri);
         if (uri.equals("/")) {
             bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(root + "/index.html")));
             head = "text/html; charset=UTF-8";
@@ -64,13 +65,25 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequ
             body = Unpooled.copiedBuffer(msg.toString(), CharsetUtil.UTF_8);
         } else {
             switch (uri.substring(uri.lastIndexOf("."))) {
+                case ".html":
+                    bufferedReader = new BufferedReader(
+                            new InputStreamReader(new FileInputStream(root + uri)));
+                    head = "text/html; charset=UTF-8";
+                    while ((line = bufferedReader.readLine()) != null) {
+                        msg.append(line + "\n");
+                    }
+                    line = null;
+                    System.out.println(uri);
+                    bufferedReader.close();
+                    body = Unpooled.copiedBuffer(msg.toString(), CharsetUtil.UTF_8);
+                    break;
                 case ".css":
                     head = "text/css; charset=UTF-8";
                     bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(root + uri)));
                     while ((line = bufferedReader.readLine()) != null) {
                         msg.append(line + "\n");
                     }
-                    System.out.println(uri);
+                    // System.out.println(uri);
                     line = null;
                     bufferedReader.close();
                     body = Unpooled.copiedBuffer(msg.toString(), CharsetUtil.UTF_8);
@@ -87,7 +100,7 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequ
                     while ((line = bufferedReader.readLine()) != null) {
                         msg.append(line + "\n");
                     }
-                    System.out.println(uri);
+                    // System.out.println(uri);
                     line = null;
                     bufferedReader.close();
                     body = Unpooled.copiedBuffer(msg.toString(), CharsetUtil.UTF_8);
@@ -104,7 +117,7 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequ
                     while ((line = bufferedReader.readLine()) != null) {
                         msg.append(line + "\n");
                     }
-                    System.out.println(uri);
+                    // System.out.println(uri);
                     line = null;
                     bufferedReader.close();
                     body = Unpooled.copiedBuffer(msg.toString(), CharsetUtil.UTF_8);

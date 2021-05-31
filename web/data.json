@@ -388,14 +388,6 @@
       ]
     },
     {
-      "type": "roleDialogue",
-      "name": "鸫",
-      "section": "【浮现白字",
-      "aside": [
-        null
-      ]
-    },
-    {
       "type": "sceneDescription",
       "description": "鸫独自行走在回家的路上，她仍在回想冰川姐妹与她分别时的场景。"
     },

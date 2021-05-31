@@ -12,8 +12,9 @@ public class App {
     private static final Log log = LogFactory.getLog(App.class);
     public static void main(String[] args) {
         try {
-            TextInterpreter tx = new TextInterpreter("C:\\Users\\asu\\Downloads\\冰川三明治-gal部分.docx");
-            tx.toJson("web/data.json");
+            // TextInterpreter tx = new TextInterpreter("C:\\Users\\asu\\Downloads\\冰川三明治-gal部分.docx");
+            TextInterpreter tx = new TextInterpreter("冰川三明治-非gal部分.docx");
+            tx.toJson("web/ndata.json");
         } catch (FileNotFoundException e) {
             log.error("word document file not find", e);
         } catch (EOFException e) {
