@@ -1,4 +1,4 @@
-package top.monoliths.ws.kernel;
+package top.monoliths.ws.server;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;

@@ -1,4 +1,4 @@
-package top.monoliths.ws.kernel;
+package top.monoliths.ws.server;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;

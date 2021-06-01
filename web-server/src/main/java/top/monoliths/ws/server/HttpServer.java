@@ -1,4 +1,4 @@
-package top.monoliths.ws.kernel;
+package top.monoliths.ws.server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -39,9 +39,8 @@ public class HttpServer {
         EventLoopGroup work = new NioEventLoopGroup();
         bootstrap.group(boss, work).handler(new LoggingHandler(LogLevel.DEBUG)).channel(NioServerSocketChannel.class)
                 .childHandler(new HttpServerInitializer());
-
         ChannelFuture f = bootstrap.bind(new InetSocketAddress(port)).sync();
-        System.out.println("server start up on port : " + port);
+        log.info ("server start up on port : " + port); 
         f.channel().closeFuture().sync();
 
     }
