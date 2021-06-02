@@ -13,9 +13,8 @@ public class App {
     
     private static final Logger log = LoggerFactory.getLogger(App.class);
     public static void main(String[] args) throws Exception {
-        log.info("msg");
-        log.error("msgoklmdwa");
         HttpServer server = new HttpServer(80);
+        log.info("server start");
         server.start();
     }
 }
