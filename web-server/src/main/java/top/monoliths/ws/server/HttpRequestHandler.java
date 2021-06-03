@@ -6,8 +6,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.net.URLDecoder;
-import java.util.HashMap;
-import java.util.Map;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -21,13 +22,28 @@ import io.netty.handler.codec.http.HttpHeaderNames;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.netty.handler.codec.http.HttpVersion;
 import io.netty.util.CharsetUtil;
+import top.monoliths.ws.kernel.ConfigData;
 
 /**
  * top implement to ChannelHandler
  */
 public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 
-    private static final String root = "web";
+    private static final Log LOG = LogFactory.getLog(HttpRequestHandler.class);
+
+    private ConfigData configData;
+
+    public void setConfigData(ConfigData configData) {
+        this.configData = configData;
+    }
+
+    public ConfigData getConfigData() {
+        return configData;
+    }
+
+    public HttpRequestHandler(ConfigData configData) {
+        setConfigData(configData);
+    }
 
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) {
@@ -35,20 +51,15 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequ
     }
 
     @Override
-    @SuppressWarnings("all")
     protected void channelRead0(ChannelHandlerContext ctx, FullHttpRequest req)
             throws FileNotFoundException, Exception {
-        // 100 Continue
-        // if (is100ContinueExpected(req)) {
-        // ctx.write(new DefaultFullHttpResponse(
-        // HttpVersion.HTTP_1_1,
-        // HttpResponseStatus.CONTINUE));
-        // }
-        // 获取请求的uri
+
+        @SuppressWarnings("all")
         String uri = URLDecoder.decode(req.uri());
-        Map<String, String> resMap = new HashMap<>();
-        resMap.put("method", req.method().name());
-        resMap.put("uri", uri);
+
+        if (configData.debug) {
+            LOG.info("request {home: " + req.headers().get("Host") + "url :" + req.uri() + "}");
+        }
 
         StringBuffer msg = new StringBuffer();
         String head = "text/html; charset=UTF-8";
@@ -56,9 +67,9 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequ
         BufferedReader bufferedReader;
         ByteBuf body;
         BufferedInputStream bf;
-        System.out.println(uri);
         if (uri.equals("/")) {
-            bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(root + "/index.html")));
+            bufferedReader = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(configData.getConfigPath() + "/index.html")));
             head = "text/html; charset=UTF-8";
             while ((line = bufferedReader.readLine()) != null) {
                 msg.append(line + "\n");
@@ -70,57 +81,59 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequ
             switch (uri.substring(uri.lastIndexOf("."))) {
                 case ".html":
                     bufferedReader = new BufferedReader(
-                            new InputStreamReader(new FileInputStream(root + uri)));
+                            new InputStreamReader(new FileInputStream(configData.getConfigPath() + uri)));
                     head = "text/html; charset=UTF-8";
                     while ((line = bufferedReader.readLine()) != null) {
                         msg.append(line + "\n");
                     }
                     line = null;
-                    System.out.println(uri);
                     bufferedReader.close();
                     body = Unpooled.copiedBuffer(msg.toString(), CharsetUtil.UTF_8);
                     break;
                 case ".css":
                     head = "text/css; charset=UTF-8";
-                    bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(root + uri)));
+                    bufferedReader = new BufferedReader(
+                            new InputStreamReader(new FileInputStream(configData.getConfigPath() + uri)));
                     while ((line = bufferedReader.readLine()) != null) {
                         msg.append(line + "\n");
                     }
-                    // System.out.println(uri);
+                
                     line = null;
                     bufferedReader.close();
                     body = Unpooled.copiedBuffer(msg.toString(), CharsetUtil.UTF_8);
                     break;
                 case ".jpg":
                     head = "image/jpeg";
-                    bf = new BufferedInputStream(new FileInputStream(root + uri));
+                    bf = new BufferedInputStream(new FileInputStream(configData.getConfigPath() + uri));
                     body = Unpooled.copiedBuffer(bf.readAllBytes());
                     bf.close();
                     break;
                 case ".js":
                     head = "application/javascript; charset=UTF-8";
-                    bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(root + uri)));
+                    bufferedReader = new BufferedReader(
+                            new InputStreamReader(new FileInputStream(configData.getConfigPath() + uri)));
                     while ((line = bufferedReader.readLine()) != null) {
                         msg.append(line + "\n");
                     }
-                    // System.out.println(uri);
+                
                     line = null;
                     bufferedReader.close();
                     body = Unpooled.copiedBuffer(msg.toString(), CharsetUtil.UTF_8);
                     break;
                 case ".png":
                     head = "image/png";
-                    bf = new BufferedInputStream(new FileInputStream(root + uri));
+                    bf = new BufferedInputStream(new FileInputStream(configData.getConfigPath() + uri));
                     body = Unpooled.copiedBuffer(bf.readAllBytes());
                     bf.close();
                     break;
                 case ".json":
                     head = "application/json; charset=UTF-8";
-                    bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(root + uri)));
+                    bufferedReader = new BufferedReader(
+                            new InputStreamReader(new FileInputStream(configData.getConfigPath() + uri)));
                     while ((line = bufferedReader.readLine()) != null) {
                         msg.append(line + "\n");
                     }
-                    // System.out.println(uri);
+                
                     line = null;
                     bufferedReader.close();
                     body = Unpooled.copiedBuffer(msg.toString(), CharsetUtil.UTF_8);

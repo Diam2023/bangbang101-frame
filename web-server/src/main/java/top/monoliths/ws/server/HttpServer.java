@@ -7,6 +7,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import top.monoliths.ws.kernel.ConfigData;
 
 import java.net.InetSocketAddress;
 
@@ -17,20 +18,20 @@ import org.slf4j.LoggerFactory;
  * netty server 2018/11/1.
  */
 public class HttpServer {
-    private static final Logger log = LoggerFactory.getLogger(HttpServer.class);
+    private static final Logger LOG = LoggerFactory.getLogger(HttpServer.class);
 
-    private int port;
+    private ConfigData configData;
 
-    public void setPort(int port) {
-        this.port = port;
+    public void setConfigData(ConfigData configData) {
+        this.configData = configData;
     }
 
-    public int getPort() {
-        return port;
+    public ConfigData getConfigData() {
+        return configData;
     }
 
-    public HttpServer(int port) {
-        setPort(port);
+    public HttpServer(ConfigData configData) {
+        setConfigData(configData);
     }
 
     public void start() throws Exception {
@@ -38,9 +39,9 @@ public class HttpServer {
         EventLoopGroup boss = new NioEventLoopGroup();
         EventLoopGroup work = new NioEventLoopGroup();
         bootstrap.group(boss, work).handler(new LoggingHandler(LogLevel.DEBUG)).channel(NioServerSocketChannel.class)
-                .childHandler(new HttpServerInitializer());
-        ChannelFuture f = bootstrap.bind(new InetSocketAddress(port)).sync();
-        log.info ("server start up on port : " + port); 
+                .childHandler(new HttpServerInitializer(getConfigData()));
+        ChannelFuture f = bootstrap.bind(new InetSocketAddress(configData.getLocal(), configData.getPort())).sync();
+        LOG.info ("server start up on port : " + configData.getPort()); 
         f.channel().closeFuture().sync();
 
     }
